@@ -8,8 +8,11 @@ use Illuminate\Support\Facades\Redis;
 
 class HelloController extends Controller
 {
-  public function index() {
-    $data = ['msg'=>'これはコントローラから渡されたメッセージだよ'];
+  public function index($id='zero') {
+    $data = [
+      'msg'=>'これはコントローラから渡されたメッセージだよ',
+      'id'=>$id
+    ];
     return view('hello.index', $data);
   }
 }
