@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redis;
 class HelloController extends Controller
 {
   public function index() {
-    return view('hello.index');
+    $data = ['msg'=>'これはコントローラから渡されたメッセージだよ'];
+    return view('hello.index', $data);
   }
 }
