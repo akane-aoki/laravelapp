@@ -8,10 +8,9 @@ use Illuminate\Support\Facades\Redis;
 
 class HelloController extends Controller
 {
-  public function index(Request $request) {
+  public function index() {
     $data = [
-      'msg'=>'これはコントローラから渡されたメッセージだよ',
-      'id'=>$request->id
+      'msg'=>'これはbladeを使ったサンプルだよ',
     ];
     return view('hello.index', $data);
   }
