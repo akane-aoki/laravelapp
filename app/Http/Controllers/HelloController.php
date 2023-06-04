@@ -3,24 +3,32 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Redis;
 
 class HelloController extends Controller
 {
-  public function __invoke() {
-    return <<<EOF
+  public function index(Request $request, Response $response) {
+
+$html = <<<EOF
 <html>
 <head>
-<title>Hello</title>
+<title>Hello/Index</title>
 <style>
 body {font-size: 16pt; color: #999; }
 h1 { font-size: 100pt; text-align: right; color: #eee; margin: -40px 0px -50px 0px; }
 </style>
 </head>
 <body>
-  <h1>Singel Action</h1>
-  <p>これは、シングルアクションコントローラのアクションだよ。</p>
+  <h1>hello</h1>
+  <h3>Request</h3>
+  <pre>{$request}</pre>
+  <h3>Response</h3>
+  <pre>{$response}</pre>
 </body>
 </html>
 EOF;
+        $response->setContent($html);
+        return $response;
   }
 }
