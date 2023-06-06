@@ -15,12 +15,13 @@ class HelloMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $data = [
-            ['name'=>'taro', 'mail'=>'tyaro@com'],
-            ['name'=>'hanako', 'mail'=>'hanako@com'],
-            ['name'=>'sachiko', 'mail'=>'sachiko@com'],
-        ];
-        $request->merge(['data'=>$data]);
-        return $next($request);
+        $response = $next($request);
+        $content = $response->content();
+
+        $pattern = '/<middleware>(.*)<\/middleware>/i';
+        $replace = '<a href="http://$1">$1</a>';
+        $content = preg_replace($pattern, $replace, $content);
+        $response->setContent($content);
+        return $response;
     }
 }
